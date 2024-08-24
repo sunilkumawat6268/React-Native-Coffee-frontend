@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   View,
   Text,
@@ -8,7 +9,6 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
 import TopNavigation from '../../navigation/TopNavigation';
 import InputText from '../../component/Input';
 import mockData from '../../mockData';

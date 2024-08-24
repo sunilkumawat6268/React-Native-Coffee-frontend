@@ -10,14 +10,11 @@ import {
 import React from 'react';
 import Header from '../../component/Header';
 import IMAGE from '../../theme/Image';
-import FavouriteData from '../../mockData/FavouriteData';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const FavouriteScreen = () => {
   const {favouriteItems} = useSelector(state => state.Favourite);
-  // const handleAddFavorite=>(item)=>{
-  //   dis
-  // }
+
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>
