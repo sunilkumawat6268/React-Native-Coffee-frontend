@@ -16,8 +16,6 @@ const BottomNavigation = () => {
     <Tab.Navigator tabBar={props => <CustomBottomBar {...props} />}>
       <Tab.Screen options={{headerShown: false}} name="Home" component={Home} />
       <Tab.Screen options={{headerShown: false}} name="Cart" component={Cart} />
-      {/* <Tab.Screen name="Payment" component={PaymentScreen} /> */}
-      {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
 
       <Tab.Screen
         options={{headerShown: false}}
