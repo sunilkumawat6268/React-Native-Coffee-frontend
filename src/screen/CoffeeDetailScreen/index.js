@@ -62,7 +62,6 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
   const decrementQuantity = (productId, costPerItem) => {
     if (coffeeDetail.quantity > 1) {
       setCoffeeDetail(coffeeDetail =>
-        // prevCount.map(coffeeDetail =>
         coffeeDetail.id === productId && coffeeDetail.quantity > 1
           ? {
               ...coffeeDetail,
@@ -74,7 +73,7 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
             }
           : coffeeDetail,
       );
-      // );
+
       dispatch(removeItems(productId));
     } else {
       setIsPressed(false);
@@ -236,7 +235,7 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
             <ButtonComponent
               price="Price"
               text="ADD TO CART"
-              cost={`${coffeeDetail.buttonOne}`}
+              cost={`${(coffeeDetail.cost * coffeeDetail.quantity).toFixed(2)}`}
               customStyles={styles.addCartBtn}
               onPress={() => handleAddData(coffeeDetail)}
               onPressIn={handlePressIn}
