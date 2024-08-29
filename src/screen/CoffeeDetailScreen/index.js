@@ -47,12 +47,13 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
 
   const incrementQuantity = (productId, costPerItem) => {
     setCoffeeDetail(coffeeDetail =>
-      // prevCount.map(coffeeDetail =>
+      // prevCount.map(initialCoffeeDetail =>
       coffeeDetail.id === productId
         ? {
             ...coffeeDetail,
             quantity: coffeeDetail.quantity + 1,
             cost: coffeeDetail.cost + costPerItem,
+            // cost: (coffeeDetail.quantity + 1) * costPerItem,
           }
         : coffeeDetail,
     ),
@@ -66,10 +67,11 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
           ? {
               ...coffeeDetail,
               quantity: coffeeDetail.quantity - 1,
-              cost:
-                coffeeDetail.quantity > 1
-                  ? coffeeDetail.cost - costPerItem
-                  : coffeeDetail.cost,
+              // cost:
+              //   coffeeDetail.quantity > 1
+              //     ? coffeeDetail.cost - costPerItem
+              //     : coffeeDetail.cost,
+              cost: (coffeeDetail.quantity - 1) * costPerItem,
             }
           : coffeeDetail,
       );
@@ -198,16 +200,17 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
         <View style={styles.btnCostContainer}>
           <View style={styles.costContainer}>
             <Text style={styles.textPrice}>Price</Text>
-            <Text style={styles.dataCost}>{coffeeDetail.cost}</Text>
+            <Text style={styles.dataCost}>
+              {(coffeeDetail.cost * coffeeDetail.quantity).toFixed(2)}
+            </Text>
           </View>
-          {/* {count.map((coffeeDetail)=>( */}
           {isPressed ? (
             <View style={styles.sizeButtonContainer}>
               <View>
                 <TouchableOpacity
                   style={styles.touchableButton}
                   onPress={() =>
-                    decrementQuantity(coffeeDetail.id, coffeeDetail.costPerItem)
+                    decrementQuantity(coffeeDetail.id, coffeeDetail.id)
                   }>
                   <Text style={styles.dataButton}>
                     {coffeeDetail.buttonTwo}
@@ -223,7 +226,7 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
                 <TouchableOpacity
                   style={styles.touchableButton}
                   onPress={() =>
-                    incrementQuantity(coffeeDetail.id, coffeeDetail.costPerItem)
+                    incrementQuantity(coffeeDetail.id, coffeeDetail.id)
                   }>
                   <Text style={styles.dataButton}>
                     {coffeeDetail.buttonOne}
@@ -232,15 +235,15 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
               </View>
             </View>
           ) : (
-            <ButtonComponent
-              price="Price"
-              text="ADD TO CART"
-              cost={`${(coffeeDetail.cost * coffeeDetail.quantity).toFixed(2)}`}
-              customStyles={styles.addCartBtn}
-              onPress={() => handleAddData(coffeeDetail)}
-              onPressIn={handlePressIn}
-              onPressOut={handlePressOut}
-            />
+            <View>
+              <ButtonComponent
+                text="ADD TO CART"
+                customStyles={styles.addCartBtn}
+                onPress={() => handleAddData(coffeeDetail)}
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+              />
+            </View>
           )}
         </View>
       </View>
@@ -266,10 +269,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   btnCostContainer: {
-    // position: 'absolute',
-    // bottom: 0,
-    // right: 0,
-    // // left: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -344,7 +343,6 @@ const styles = StyleSheet.create({
   heartImgContainer: {
     borderRadius: 10,
     backgroundColor: '#21262E',
-    // justifyContent: 'space-between',
     width: 30,
     height: 30,
     marginTop: 20,
