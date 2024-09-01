@@ -1,4 +1,3 @@
-// import 'react-native-gesture-handler';
 import 'react-native-gesture-handler';
 import 'setimmediate';
 import {AppRegistry} from 'react-native';

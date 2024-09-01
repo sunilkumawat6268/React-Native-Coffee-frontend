@@ -1,7 +1,5 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 
-import Home from '../screen/BottomTabPages/Home';
 import SignUp from '../screen/SignUp';
 import Login from '../screen/Login';
 import {NavigationContainer} from '@react-navigation/native';

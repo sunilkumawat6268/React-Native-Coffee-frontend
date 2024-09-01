@@ -10,19 +10,16 @@ import {
 import React from 'react';
 import Header from '../../component/Header';
 import IMAGE from '../../theme/Image';
-import FavouriteData from '../../mockData/FavouriteData';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const FavouriteScreen = () => {
   const {favouriteItems} = useSelector(state => state.Favourite);
-  // const handleAddFavorite=>(item)=>{
-  //   dis
-  // }
+
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>
         <Header
-          heading="Favorites"
+          heading="Favorites Screen"
           imageSource={IMAGE.headerIcon}
           imageSourceTwo={IMAGE.headerProfile}
         />
@@ -112,7 +109,6 @@ const styles = StyleSheet.create({
   heartImgContainer: {
     borderRadius: 10,
     backgroundColor: '#21262E',
-
     width: 30,
     height: 30,
     marginTop: 20,
