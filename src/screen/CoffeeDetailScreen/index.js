@@ -63,15 +63,17 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
   const decrementQuantity = (productId, costPerItem) => {
     if (coffeeDetail.quantity > 1) {
       setCoffeeDetail(coffeeDetail =>
-        coffeeDetail.id === productId && coffeeDetail.quantity > 1
+        // coffeeDetail.id === productId && coffeeDetail.quantity > 1
+        coffeeDetail.id === productId
           ? {
               ...coffeeDetail,
               quantity: coffeeDetail.quantity - 1,
-              // cost:
-              //   coffeeDetail.quantity > 1
-              //     ? coffeeDetail.cost - costPerItem
-              //     : coffeeDetail.cost,
-              cost: (coffeeDetail.quantity - 1) * costPerItem,
+              cost:
+                coffeeDetail.quantity < 1
+                  ? coffeeDetail.cost - costPerItem
+                  : coffeeDetail.cost,
+              // cost: (coffeeDetail.quantity - 1) * costPerItem,
+              // cost: coffeeDetail.cost - costPerItem,
             }
           : coffeeDetail,
       );
