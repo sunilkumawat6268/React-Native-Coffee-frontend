@@ -9,7 +9,7 @@ import {
   ScrollView,
   ToastAndroid,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../../component/Header';
 import IMAGE from '../../theme/Image';
 import FavouriteData from '../../mockData/FavouriteData';
@@ -32,6 +32,20 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
   const [isPressed, setIsPressed] = useState(false);
   const [isPressColor, setPressColor] = useState(false);
   const [coffeeDetail, setCoffeeDetail] = useState(initialCoffeeDetail);
+  //   useEffect(() => {});
+
+  useEffect(() => {
+    const itemInCart = cartAddingData.find(
+      item => item.id === initialCoffeeDetail.id,
+    );
+    if (itemInCart && itemInCart.quantity > 0) {
+      setIsPressed(true);
+      setCoffeeDetail(coffeeDetail => ({
+        ...coffeeDetail,
+        quantity: itemInCart.quantity,
+      }));
+    }
+  }, [cartAddingData, initialCoffeeDetail.id]);
 
   const handlePressIn = () => {
     setIsPressed(true);
@@ -39,11 +53,11 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
     showToast();
   };
 
-  const handlePressOut = () => {
-    setIsPressed(false);
-    dispatch(addItems(coffeeDetail));
-    showToast();
-  };
+  //   const handlePressOut = () => {
+  //     setIsPressed(false);
+  //     dispatch(addItems(coffeeDetail));
+  //     showToast();
+  //   };
 
   const incrementQuantity = (productId, costPerItem) => {
     setCoffeeDetail(coffeeDetail =>
@@ -243,7 +257,7 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
                 customStyles={styles.addCartBtn}
                 onPress={() => handleAddData(coffeeDetail)}
                 onPressIn={handlePressIn}
-                onPressOut={handlePressOut}
+                // onPressOut={handlePressOut}
               />
             </View>
           )}
