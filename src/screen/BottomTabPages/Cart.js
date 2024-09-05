@@ -6,12 +6,14 @@ import {
   Text,
   View,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import Header from '../../component/Header';
 import CartData from '../../mockData/CartData';
 import IMAGE from '../../theme/Image';
 import {useSelector, useDispatch} from 'react-redux';
+import ButtonComponent from '../../component/Button';
 //
 // import removeItems from '../../store/CounterReducer';
 import {
@@ -60,7 +62,7 @@ const Cart = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.secondContainer}>
         <Header
           heading="Cart"
@@ -116,8 +118,22 @@ const Cart = () => {
             </View>
           )}
         />
+        <View style={styles.btnCostContainer}>
+          <View style={styles.costContainer}>
+            <Text style={styles.textPrice}>Price</Text>
+            <Text style={styles.dataCost}>
+              {/* {(item.cost * item.quantity).toFixed(2)} */}
+              {/* {`${cost}`} */}
+            </Text>
+          </View>
+          <ButtonComponent
+            text="Pay"
+            customStyles={styles.addCartBtn}
+            // onPress={() => handleAddData(coffeeDetail)}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -133,6 +149,28 @@ const styles = StyleSheet.create({
   },
   textCartHeading: {
     color: 'white',
+  },
+  dataFullContainer: {
+    marginBottom: 30,
+  },
+  dataCost: {
+    color: '#d17842',
+    fontSize: 20,
+  },
+  btnCostContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // position: 'absolute',
+    // top: 650,
+    // bottom: 0,
+    // right: 0,
+    // left: 0,
+    // mar,
+  },
+  costContainer: {
+    justifyContent: 'center',
+    marginTop: 10,
+    margin: 15,
   },
   cartFirstContainer: {
     backgroundColor: '#262B33',
@@ -184,6 +222,17 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     alignSelf: 'center',
     justifyContent: 'center',
+  },
+  addCartBtn: {
+    width: 240,
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+  },
+  textPrice: {
+    color: 'grey',
+    fontSize: 12,
+    alignSelf: 'center',
   },
   touchableButton: {
     backgroundColor: '#d17842',
