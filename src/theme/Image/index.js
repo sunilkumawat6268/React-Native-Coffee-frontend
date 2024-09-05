@@ -41,8 +41,12 @@ const IMAGE = {
   light: require('../../assets/Images/light.png'),
   order: require('../../assets/Images/order.png'),
   logOutIcon: require('../../assets/Images/logOutIcon.png'),
+  //paymentImg
   chipImg: require('../../assets/Images/chipImg.png'),
   walletPaymentImg: require('../../assets/Images/walletPaymentImg.png'),
+  googlePayImg: require('../../assets/Images/googlePayImg.png'),
+  applePayImg: require('../../assets/Images/applePayImg.png'),
+  amazonPayImg: require('../../assets/Images/amazonPayImg.png'),
 };
 
 export default IMAGE;

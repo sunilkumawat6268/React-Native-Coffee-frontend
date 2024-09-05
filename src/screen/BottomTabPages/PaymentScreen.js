@@ -28,7 +28,11 @@ const PaymentScreen = () => {
             </View>
           </View>
         </View>
-        <PaymentList imageSource={IMAGE.walletPaymentImg} />
+        <PaymentList imageSource={IMAGE.walletPaymentImg} text="Wallet" />
+        <PaymentList imageSource={IMAGE.googlePayImg} text="Google Pay" />
+        <PaymentList imageSource={IMAGE.applePayImg} text="Apple Pay" />
+        <PaymentList imageSource={IMAGE.amazonPayImg} text="Amazon Pay" />
+
         <ButtonComponent
           price="Price"
           text="Pay from Credit Card"
@@ -55,6 +59,8 @@ const styles = StyleSheet.create({
     width: 240,
     position: 'absolute',
     right: 0,
+    // bottom: 20,
+    top: 100,
   },
   cardText: {
     color: 'white',
@@ -67,10 +73,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   cardContainer: {
-    width: 320,
+    width: 350,
     height: 186,
-    backgroundColor: '#262B33',
-
+    backgroundColor: '#1e222a',
+    marginBottom: 10,
     borderRadius: 15,
   },
   cardVisaText: {
