@@ -9,7 +9,7 @@ import {
   ScrollView,
   ToastAndroid,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../../component/Header';
 import IMAGE from '../../theme/Image';
 import FavouriteData from '../../mockData/FavouriteData';
@@ -27,33 +27,45 @@ import store from '../../store/Store';
 const CoffeeDetailScreen = ({route, navigation, item}) => {
   const {coffeeDetail: initialCoffeeDetail} = route.params;
   const {cartAddingData} = useSelector(state => state.counter);
+  const {favouriteItems} = useSelector(state => state.Favourite);
   const dispatch = useDispatch();
 
   const [isPressed, setIsPressed] = useState(false);
   const [isPressColor, setPressColor] = useState(false);
   const [coffeeDetail, setCoffeeDetail] = useState(initialCoffeeDetail);
 
+  useEffect(() => {
+    const itemInCart = cartAddingData.find(
+      item => item.id === initialCoffeeDetail.id,
+    );
+    if (itemInCart && itemInCart.quantity > 0) {
+      setIsPressed(true);
+      setCoffeeDetail(coffeeDetail => ({
+        ...coffeeDetail,
+        quantity: itemInCart.quantity,
+      }));
+    }
+  }, [cartAddingData, initialCoffeeDetail.id]);
+
+  useEffect(() => {
+    const itemFavorite = favouriteItems.find(
+      item => item.id === initialCoffeeDetail.id,
+    );
+    setPressColor(itemFavorite);
+  }, [favouriteItems, initialCoffeeDetail.id]);
   const handlePressIn = () => {
     setIsPressed(true);
     dispatch(addItems(coffeeDetail));
     showToast();
   };
 
-  const handlePressOut = () => {
-    setIsPressed(false);
-    dispatch(addItems(coffeeDetail));
-    showToast();
-  };
-
   const incrementQuantity = (productId, costPerItem) => {
     setCoffeeDetail(coffeeDetail =>
-      // prevCount.map(initialCoffeeDetail =>
       coffeeDetail.id === productId
         ? {
             ...coffeeDetail,
             quantity: coffeeDetail.quantity + 1,
             cost: coffeeDetail.cost + costPerItem,
-            // cost: (coffeeDetail.quantity + 1) * costPerItem,
           }
         : coffeeDetail,
     ),
@@ -63,15 +75,14 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
   const decrementQuantity = (productId, costPerItem) => {
     if (coffeeDetail.quantity > 1) {
       setCoffeeDetail(coffeeDetail =>
-        coffeeDetail.id === productId && coffeeDetail.quantity > 1
+        coffeeDetail.id === productId
           ? {
               ...coffeeDetail,
               quantity: coffeeDetail.quantity - 1,
-              // cost:
-              //   coffeeDetail.quantity > 1
-              //     ? coffeeDetail.cost - costPerItem
-              //     : coffeeDetail.cost,
-              cost: (coffeeDetail.quantity - 1) * costPerItem,
+              cost:
+                coffeeDetail.quantity < 1
+                  ? coffeeDetail.cost - costPerItem
+                  : coffeeDetail.cost,
             }
           : coffeeDetail,
       );
@@ -240,8 +251,8 @@ const CoffeeDetailScreen = ({route, navigation, item}) => {
                 text="ADD TO CART"
                 customStyles={styles.addCartBtn}
                 onPress={() => handleAddData(coffeeDetail)}
-                onPressIn={handlePressIn}
-                onPressOut={handlePressOut}
+                // onPressIn={handlePressIn}
+                // onPressOut={handlePressOut}
               />
             </View>
           )}

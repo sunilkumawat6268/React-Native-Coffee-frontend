@@ -16,19 +16,28 @@ export default PaymentList;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#262B33',
+    backgroundColor: '#14171d',
     width: 350,
     height: 50,
     borderRadius: 25,
+    marginVertical: 10,
+    marginRight: 20,
+    borderColor: '#242930',
+    flexDirection: 'row',
+
+    borderWidth: 2,
   },
   bgImg: {
     width: 25,
-    height: 20,
+    height: 29,
     marginLeft: 10,
+    marginTop: 10,
   },
   text: {
     color: 'white',
     fontSize: 14,
     fontWeight: '600',
+    marginLeft: 15,
+    alignSelf: 'center',
   },
 });
