@@ -1,12 +1,13 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import React from 'react';
 
 import IMAGE from '../../theme/Image';
-import {styles} from './styles';
-import {FlatList} from 'react-native';
+import styles from './styles';
 import ProfileMockData from '../../mockData/ProfileMockData';
+import {useDispatch, useSelector} from 'react-redux';
 
 const ProfilePage = ({navigation}) => {
+  const dispatch = useDispatch();
   const handlePress = id => {
     switch (id) {
       case 1:
@@ -23,18 +24,23 @@ const ProfilePage = ({navigation}) => {
         break;
     }
   };
+  const loginReducer = useSelector(state => state.loginReducer);
+  console.log('data', loginReducer);
   return (
     <View style={styles.container}>
       <View style={styles.secondContainer}>
-        {/* <Image style={styles.profileImg} source={IMAGE.headerProfile} />
-         */}
         <View style={styles.userContainer}>
           <Image style={styles.userImg} source={IMAGE.headerProfile} />
-          <View>
-            <Text style={styles.profileName}>John Doe</Text>
-
-            <Text style={styles.emailId}>john@gmail.com</Text>
-          </View>
+          <FlatList
+            data={loginReducer}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <View>
+                <Text style={styles.profileName}>{item.nameReducer}</Text>
+                <Text style={styles.emailId}>{item.emailReducer}</Text>
+              </View>
+            )}
+          />
           <View style={styles.userEditContainer}>
             <Text style={styles.userEditText}>Edit</Text>
 

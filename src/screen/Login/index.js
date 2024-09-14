@@ -14,6 +14,8 @@ import InputText from '../../component/Input';
 import ButtonComponent from '../../component/Button';
 import Toast from 'react-native-toast-message';
 import styles from './styles';
+import {useDispatch, useSelector} from 'react-redux';
+import {addLogin} from '../../store/LoginReducer';
 
 const Login = ({navigation}) => {
   const [name, setName] = useState('');
@@ -23,6 +25,7 @@ const Login = ({navigation}) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState('');
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState('');
 
+  const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -65,6 +68,14 @@ const Login = ({navigation}) => {
         },
       });
     }
+    dispatch(
+      addLogin({
+        nameReducer: name,
+        emailReducer: email,
+      }),
+      setEmail(''),
+      setName(''),
+    );
   };
   return (
     <ScrollView style={styles.container}>
@@ -75,8 +86,16 @@ const Login = ({navigation}) => {
       />
       <Text style={styles.helloText}>Hello, Register here to get started.</Text>
       <View>
-        <InputText placeholder="Full Name" onChangeText={setName} />
-        <InputText placeholder="Email Address" onChangeText={setEmail} />
+        <InputText
+          placeholder="Full Name"
+          onChangeText={setName}
+          value={name}
+        />
+        <InputText
+          placeholder="Email Address"
+          onChangeText={setEmail}
+          value={email}
+        />
         <InputText
           placeholder="Password"
           onChangeText={setPassword}

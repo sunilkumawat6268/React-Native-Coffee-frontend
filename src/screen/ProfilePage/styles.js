@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
@@ -27,18 +27,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   flatListContainer: {
-    // flex: 1,
     backgroundColor: 'black',
     marginTop: 30,
   },
   userContainer: {
     flexDirection: 'row',
-    // marginRight: 4,
-    // flex: 0.6,
 
     marginBottom: 2,
-    // margin: 10,
-    // backgroundColor: 'white',
   },
   profileDataIcon: {
     width: 30,
@@ -50,7 +45,6 @@ export const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 8,
     alignSelf: 'center',
-    // fontWeight: 'bold',
     fontSize: 14,
   },
   emailId: {
@@ -60,9 +54,7 @@ export const styles = StyleSheet.create({
   profileName: {
     color: 'white',
     fontSize: 16,
-    // fontWeight: 'bold',
     marginLeft: 4,
-    // alignSelf: 'center',
     marginTop: 15,
     marginLeft: 8,
   },
