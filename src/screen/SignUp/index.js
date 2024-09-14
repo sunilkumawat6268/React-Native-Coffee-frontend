@@ -50,7 +50,9 @@ const SignUp = ({navigation}) => {
         navigation.navigate('Welcome');
       }, 1);
     }
-    dispatch(addLogin(email));
+    dispatch(addLogin({emailReducer: email}));
+    setEmail('');
+    setPassword();
   };
   return (
     <ScrollView style={styles.container}>
@@ -62,7 +64,11 @@ const SignUp = ({navigation}) => {
       <Text style={styles.helloText}>Welcome back!</Text>
       <Text style={styles.helloText}>Glad to see you, Again!</Text>
       <View>
-        <InputText placeholder="Email Address" onChangeText={setEmail} />
+        <InputText
+          placeholder="Email Address"
+          onChangeText={setEmail}
+          value={email}
+        />
         <InputText
           placeholder="Password"
           onChangeText={setPassword}
