@@ -60,6 +60,12 @@ const Cart = () => {
     );
     dispatch(removeItems(productId));
   };
+  // const totalCostCalculate = () => {
+  //   return count.reduce(
+  //     (total, item) => total + (item.cost * item.quantity, 0).toFixed(2),
+  //   );
+  // };
+  // const totalCost = totalCostCalculate();
 
   return (
     <ScrollView style={styles.container}>
@@ -122,8 +128,8 @@ const Cart = () => {
           <View style={styles.costContainer}>
             <Text style={styles.textPrice}>Price</Text>
             <Text style={styles.dataCost}>
-              {/* {(item.cost * item.quantity).toFixed(2)} */}
-              {/* {`${cost}`} */}
+              ${totalCost}
+              {/* {cost} */}
             </Text>
           </View>
           <ButtonComponent
@@ -153,19 +159,10 @@ const styles = StyleSheet.create({
   dataFullContainer: {
     marginBottom: 30,
   },
-  dataCost: {
-    color: '#d17842',
-    fontSize: 20,
-  },
+
   btnCostContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // position: 'absolute',
-    // top: 650,
-    // bottom: 0,
-    // right: 0,
-    // left: 0,
-    // mar,
   },
   costContainer: {
     justifyContent: 'center',

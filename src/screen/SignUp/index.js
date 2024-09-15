@@ -14,6 +14,8 @@ import InputText from '../../component/Input';
 import ButtonComponent from '../../component/Button';
 import Toast from 'react-native-toast-message';
 import styles from './styles';
+import {addLogin} from '../../store/LoginReducer';
+import {useDispatch, useSelector} from 'react-redux';
 
 const SignUp = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -22,6 +24,7 @@ const SignUp = ({navigation}) => {
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
+  const dispatch = useDispatch();
 
   const handleOnSubmit = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,14 +45,14 @@ const SignUp = ({navigation}) => {
         type: 'success',
         text1: 'Login Successfully',
         text2: 'Welcome to Coffee Shop App',
-        // onHide: () => {
-        //   navigation.navigate('Home');
-        // },
       });
       setTimeout(() => {
         navigation.navigate('Welcome');
       }, 1);
     }
+    dispatch(addLogin({emailReducer: email}));
+    setEmail('');
+    setPassword();
   };
   return (
     <ScrollView style={styles.container}>
@@ -61,7 +64,11 @@ const SignUp = ({navigation}) => {
       <Text style={styles.helloText}>Welcome back!</Text>
       <Text style={styles.helloText}>Glad to see you, Again!</Text>
       <View>
-        <InputText placeholder="Email Address" onChangeText={setEmail} />
+        <InputText
+          placeholder="Email Address"
+          onChangeText={setEmail}
+          value={email}
+        />
         <InputText
           placeholder="Password"
           onChangeText={setPassword}
